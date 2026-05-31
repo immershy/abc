@@ -1,0 +1,137 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="J0av-PCmArJ951An6CJ1">
+    <mxGraphModel dx="1352" dy="766" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="第 4 步:给两个下游用" vertex="1">
+          <mxGeometry height="468" width="333" x="125" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="2" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🔍 &lt;b&gt;给意图路由用&lt;/b&gt;&#xa;只取主改写一条&#xa;『小米 SU7 的续航里程...』&#xa;↓&#xa;丢进 ES 看命中&#xa;哪个 agent 的关键词" vertex="1">
+          <mxGeometry height="174" width="258" x="46" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="2" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📚 &lt;b&gt;给 RAG 检索用&lt;/b&gt;&#xa;主改写 + 扩展&#xa;多条 query 并发去召回&#xa;结果合并再 rerank&#xa;↓&#xa;&lt;b&gt;召回率更高&lt;/b&gt;" vertex="1">
+          <mxGeometry height="174" width="222" x="63" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="第 3 步:调用小模型改写" vertex="1">
+          <mxGeometry height="569" width="340" x="8" y="1521" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="第 2 步:塞进行业黑话词典" vertex="1">
+          <mxGeometry height="642" width="340" x="368" y="1199" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="第 1 步:补上下文" vertex="1">
+          <mxGeometry height="569" width="340" x="728" y="902" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="whiteSpace=wrap;strokeWidth=3;fillColor=#1e88e5;strokeColor=#0d47a1;fontColor=#fff;" value="📊 Query 改写到底在干嘛 · 通俗版&#xa;&lt;i&gt;用一个例子讲清楚每步为什么要做&lt;/i&gt;" vertex="1">
+          <mxGeometry height="126" width="260" x="508" y="179" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="👤 用户这一轮说&#xa;『&lt;b&gt;它续航多少?&lt;/b&gt;』" vertex="1">
+          <mxGeometry height="63" width="150" x="818" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🤔 问题:这句话单独看,系统根本不知道&#xa;&#39;它&#39;指什么、问的是哪个产品&#xa;直接拿去 ES 搜 / 给路由判断 → 必然瞎猜" vertex="1">
+          <mxGeometry height="150" width="260" x="763" y="526" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🎯 目标:把这句口语化、带指代的短问&#xa;变成一句&lt;b&gt;独立、明确、含关键词的完整问题&lt;/b&gt;" vertex="1">
+          <mxGeometry height="126" width="260" x="763" y="726" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📜 把&lt;b&gt;最近 5 轮对话&lt;/b&gt;拼成一段历史&#xa;送给 LLM 一起看&#xa;&#xa;&lt;i&gt;user: 小米 SU7 怎么样?&#xa;assistant: SU7 是小米首款轿车...&#xa;user: 它续航多少? ← 本轮&lt;/i&gt;" vertex="1">
+          <mxGeometry height="222" width="260" x="763" y="927" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="💡 &lt;b&gt;为什么:&lt;/b&gt;&#xa;让 LLM 能看到&#39;它=SU7&#39;的线索&#xa;这就是&lt;b&gt;指代消解 / 多轮合并&lt;/b&gt;" vertex="1">
+          <mxGeometry height="126" width="260" x="773" y="1272" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📖 从租户配置的&lt;b&gt;同义词词典&lt;/b&gt;里&#xa;挑出和本句相关的词条一起送过去&#xa;&#xa;&lt;i&gt;{&#39;SU7&#39;: [&#39;小米 SU7&#39;,&#39;米 7&#39;,&#39;su7 标准版&#39;],&#xa;  &#39;续航&#39;: [&#39;里程&#39;,&#39;续航里程&#39;]}&lt;/i&gt;" vertex="1">
+          <mxGeometry height="222" width="260" x="403" y="1224" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="💡 &lt;b&gt;为什么:&lt;/b&gt;&#xa;每家公司有自己的黑话/产品别名&#xa;避免 LLM 改写成不在词典里的说法&#xa;让改写结果更贴近 &lt;b&gt;ES 里能命中的词&lt;/b&gt;" vertex="1">
+          <mxGeometry height="198" width="260" x="413" y="1582" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🤖 把 history + 词典 + 本句&#xa;打包 HTTP 发给外部算法服务&#xa;跑一个&lt;b&gt;便宜的快速小模型&lt;/b&gt;&#xa;&#xa;返回:&#xa;• 主改写:『小米 SU7 的续航里程是多少』&#xa;• 扩展:[&#39;小米 SU7 续航&#39;,&#39;SU7 里程&#39;]" vertex="1">
+          <mxGeometry height="270" width="260" x="53" y="1546" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="💡 &lt;b&gt;为什么用小模型:&lt;/b&gt;&#xa;这一步要在 &lt;b&gt;1 秒内&lt;/b&gt;返回,慢了就放弃&#xa;用大模型成本高、还会拖死主链路&#xa;小模型够用就行" vertex="1">
+          <mxGeometry height="174" width="260" x="43" y="1891" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Step4" vertex="1">
+          <mxGeometry height="54" width="100" x="383" y="1951" as="geometry" />
+        </mxCell>
+        <mxCell id="19" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 不论改写成功失败,主流程都不卡&#xa;失败/超时 → 自动回退用原 query&#xa;(只是命中率会差一点)" vertex="1">
+          <mxGeometry height="150" width="260" x="303" y="2140" as="geometry" />
+        </mxCell>
+        <mxCell id="20" parent="1" style="rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="继续后面的路由 / 检索 / 回答" vertex="1">
+          <mxGeometry height="63" width="231" x="318" y="2340" as="geometry" />
+        </mxCell>
+        <mxCell id="21" edge="1" parent="1" source="9" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="22" edge="1" parent="1" source="10" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="11" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" edge="1" parent="1" source="11" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="12" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="24" edge="1" parent="1" source="12" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.53;exitY=1;entryX=0.5;entryY=0;" target="13" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="903" y="1174" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" edge="1" parent="1" source="12" style="curved=1;startArrow=none;endArrow=block;exitX=0.27;exitY=1;entryX=1;entryY=0.22;" target="14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="821" y="1174" />
+              <mxPoint x="821" y="1199" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="26" edge="1" parent="1" source="14" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.53;exitY=1;entryX=0.5;entryY=0;" target="15" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="543" y="1471" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="14" style="curved=1;startArrow=none;endArrow=block;exitX=0.27;exitY=1;entryX=1;entryY=0.22;" target="16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="461" y="1471" />
+              <mxPoint x="461" y="1521" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="16" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.47;exitY=1;entryX=0.5;entryY=0;" target="17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="173" y="1841" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="16" style="curved=1;startArrow=none;endArrow=block;exitX=0.74;exitY=1;entryX=0.07;entryY=0;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="256" y="1841" />
+              <mxPoint x="256" y="1866" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="18" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="31" edge="1" parent="1" source="19" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
