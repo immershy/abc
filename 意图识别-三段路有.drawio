@@ -1,0 +1,187 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="WYUqQL5lVv4Pltlr9eGU">
+    <mxGraphModel dx="1739" dy="984" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="whiteSpace=wrap;strokeWidth=3;fillColor=#7b1fa2;strokeColor=#4a148c;fontColor=#fff;" value="📊 图 2 / 共 4 · 意图识别三段式路由&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;LlmAgentRouter.selectAgent() 内部漏斗&#xa;截图里【能力说明】配置在这里生效" vertex="1">
+          <mxGeometry height="126" width="492" x="150" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=#c8e6c9;strokeColor=#388e3c;fontColor=light-dark(#333333,#cccccc);" value="输入: 用户 query&#xa;+ 候选 agentIdList (N 个)" vertex="1">
+          <mxGeometry height="63" width="207" x="292" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Step 1&#xa;━━━━━━━━━━&#xa;短路判断" vertex="1">
+          <mxGeometry height="262" width="262" x="265" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#a5d6a7;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 直接返回&#xa;━━━━━━━━━━&#xa;候选=1 且 noNeedAgentRoute&#xa;或 单 agent 白名单用户" vertex="1">
+          <mxGeometry height="150" width="260" x="8" y="2728" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff3e0;strokeColor=#f57c00;fontColor=light-dark(#333333,#cccccc);" value="Step 2 · 关键词倒排召回&#xa;━━━━━━━━━━━━━━━━━━━━&#xa;方案: ES BoolQuery (filterBySearch)&#xa;目的: 用【正/负向关键词】做硬过滤" vertex="1">
+          <mxGeometry height="126" width="380" x="318" y="633" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📚 AGENT_INDEX (ES)&#xa;━━━━━━━━━━&#xa;离线由 AgentIndexConsumer 写入&#xa;━━━━━━━━━━&#xa;keyword: 正向关键词&#xa;(领克三电权益/三包/电池衰减/...)&#xa;refuseKeyword: 负向关键词&#xa;(道路救援/充电桩/行车记录仪/...)&#xa;text: 自然语言提示" vertex="1">
+          <mxGeometry height="350" width="215" x="401" y="1033" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BoolQuery 语义:&#xa;━━━━━━━━━━&#xa;MUST: keyword OR text 命中 query&#xa;MUST_NOT: refuseKeyword 命中 query" vertex="1">
+          <mxGeometry height="174" width="260" x="378" y="809" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="剩余&#xa;候选数?" vertex="1">
+          <mxGeometry height="132" width="132" x="442" y="1433" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#e1bee7;strokeColor=#7b1fa2;fontColor=light-dark(#333333,#cccccc);" value="Step 3 · 示例问多路召回 + 重排&#xa;━━━━━━━━━━━━━━━━━━━━&#xa;方案: 双路召回 + 算法服务打分&#xa;目的: 在能力相近的 agent 之间精排" vertex="1">
+          <mxGeometry height="126" width="380" x="431" y="1639" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=#e3f2fd;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📚 AGENT_FLOW_EXT_INDEX&#xa;━━━━━━━━━━&#xa;每个 agent 的&#xa;question_example" vertex="1">
+          <mxGeometry height="182" width="215" x="513" y="1991" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🔍 向量召回&#xa;HNSW + 算法服务&#xa;batchText2Vector" vertex="1">
+          <mxGeometry height="102" width="185" x="417" y="1839" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🔍 关键词召回&#xa;termQuery" vertex="1">
+          <mxGeometry height="78" width="161" x="652" y="1851" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="合并去重" vertex="1">
+          <mxGeometry height="54" width="124" x="559" y="2224" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="⚖️ textSimilarityReRank&#xa;算法服务打分&#xa;取 Top1" vertex="1">
+          <mxGeometry height="102" width="230" x="506" y="2328" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffcdd2;strokeColor=#c62828;fontColor=light-dark(#333333,#cccccc);" value="Step 4 · LLM 兜底&#xa;━━━━━━━━━━━━━━━━━━━━&#xa;方案: RoutPromptTemplate&#xa;目的: 复杂语义二选一" vertex="1">
+          <mxGeometry height="126" width="380" x="543" y="2504" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe0b2;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="🤖 LLM&#xa;━━━━━━━━━━&#xa;输入: 候选 agent 的&#xa;name + abilityDesText(自然语言)&#xa;+ 历史对话&#xa;输出: {intent: agentName}" vertex="1">
+          <mxGeometry height="198" width="260" x="603" y="2704" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="1" style="rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=3;fillColor=#c8e6c9;strokeColor=#388e3c;fontColor=light-dark(#333333,#cccccc);" value="🎯 选中目标 Agent&#xa;(进入 RAG + 回答阶段)" vertex="1">
+          <mxGeometry height="63" width="191" x="264" y="2952" as="geometry" />
+        </mxCell>
+        <mxCell id="19" edge="1" parent="1" source="2" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" edge="1" parent="1" source="3" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="21" edge="1" parent="1" source="4" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.83;entryX=0.5;entryY=0;" target="5" value="是">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="138" y="596" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="22" edge="1" parent="1" source="5" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0;entryY=0.11;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="138" y="2927" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" edge="1" parent="1" source="4" style="curved=1;startArrow=none;endArrow=block;exitX=0.83;exitY=1;entryX=0.5;entryY=0;" target="6" value="否">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="508" y="596" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="24" edge="1" parent="1" source="6" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" edge="1" parent="1" source="8" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="26" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="9" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.8;entryX=0.42;entryY=0;" target="18" value="=1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="333" y="1602" />
+              <mxPoint x="333" y="2927" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="9" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.96;entryX=0.5;entryY=0;" target="10" value="&gt;1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="621" y="1602" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="10" style="curved=1;startArrow=none;endArrow=block;exitX=0.31;exitY=1;entryX=0.5;entryY=0;" target="12" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="509" y="1802" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="10" style="curved=1;startArrow=none;endArrow=block;exitX=0.68;exitY=1;entryX=0.5;entryY=0;" target="13" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="732" y="1802" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="31" edge="1" parent="1" source="12" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.09;entryY=0;" target="11" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="509" y="1966" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="32" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.91;entryY=0;" target="11" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="732" y="1966" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="33" edge="1" parent="1" source="11" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;" target="14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="34" edge="1" parent="1" source="14" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;" target="15" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35" edge="1" parent="1" source="15" style="curved=1;startArrow=none;endArrow=block;exitX=0.12;exitY=1;entryX=0.83;entryY=0;" target="18" value="打分成功">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="472" y="2467" />
+              <mxPoint x="472" y="2927" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="36" edge="1" parent="1" source="15" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.78;exitY=1;entryX=0.5;entryY=0;" target="16" value="失败/为空">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="733" y="2467" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="37" edge="1" parent="1" source="16" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="38" edge="1" parent="1" source="17" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.27;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="733" y="2927" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
