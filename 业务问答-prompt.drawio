@@ -1,0 +1,197 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="Dvug166_XvJPxZj2nwSF">
+    <mxGraphModel dx="1432" dy="811" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffccbc;strokeColor=#d84315;fontColor=light-dark(#333333,#cccccc);" value="🎨 FreeMarker 渲染" vertex="1">
+          <mxGeometry height="1523" width="558" x="2028" y="89" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#c5e1a5;strokeColor=#558b2f;fontColor=light-dark(#333333,#cccccc);" value="🧩 组件提供的变量" vertex="1">
+          <mxGeometry height="996" width="338" x="1608" y="414" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=light-dark(#333333,#cccccc);" value="⚙️ ScriptPromptTemplate · 三层变量注入" vertex="1">
+          <mxGeometry height="1293" width="310" x="1248" y="72" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff9c4;strokeColor=#f9a825;fontColor=light-dark(#333333,#cccccc);" value="📦 模板来源 — Nacos 配置中心" vertex="1">
+          <mxGeometry height="404" width="559" x="550" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="whiteSpace=wrap;strokeWidth=3;fillColor=#d84315;strokeColor=#bf360c;fontColor=#fff;" value="📊 图 4 / 共 4 · Prompt 设计&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;ScriptPromptTemplate: Nacos 模板 + FreeMarker 渲染 + 三层变量注入" vertex="1">
+          <mxGeometry height="126" width="492" x="8" y="19" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="AGENT_INTRODUCE&#xa;Agent 自我介绍片段" vertex="1">
+          <mxGeometry height="78" width="202" x="584" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="AGENT_ROUTE&#xa;意图路由 (LLM 兜底用)" vertex="1">
+          <mxGeometry height="78" width="221" x="575" y="171" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="AGENT_REACT&#xa;正式回答模板" vertex="1">
+          <mxGeometry height="78" width="163" x="604" y="299" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="DiamondTemplateLoader&#xa;━━━━━━━━━━&#xa;FreeMarker 加载器&#xa;改完即生效, 无需发版" vertex="1">
+          <mxGeometry height="126" width="238" x="846" y="131" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="① injectRequestVariables&#xa;━━━━━━━━━━&#xa;query / tenantId / sessionId&#xa;channel / isHotline / systemTime / aiTips" vertex="1">
+          <mxGeometry height="174" width="260" x="1273" y="107" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="② injectContextVariables&#xa;━━━━━━━━━━&#xa;遍历所有 PromptValuable 对象" vertex="1">
+          <mxGeometry height="126" width="260" x="1273" y="331" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="③ injectComponentVariables&#xa;━━━━━━━━━━&#xa;从各 Memory / Tool 组件&#xa;loadMemoryVariables()" vertex="1">
+          <mxGeometry height="150" width="260" x="1273" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#ffe082;strokeColor=#ff8f00;fontColor=light-dark(#333333,#cccccc);" value="AgentIntroducePromptTemplate&#xa;→ agentDescription&#xa;━━━━━━━━━━&#xa;PromptFragment 按 NLS 模板拼装:&#xa;&#39;当前Agent为X专家&#39;&#xa;&#39;当用户咨询包含A/B/C时属此意图&#39;&#xa;&#39;包含D/E时不属此意图&#39;" vertex="1">
+          <mxGeometry height="246" width="288" x="1633" y="449" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BaseEntityMemory&#xa;→ relatedEntities&#xa;(实体识别结果)" vertex="1">
+          <mxGeometry height="102" width="191" x="1681" y="745" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BaseChatMemory&#xa;→ historyMessages (List)&#xa;→ historyMessageStr (拼接串)" vertex="1">
+          <mxGeometry height="126" width="260" x="1647" y="897" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#a5d6a7;strokeColor=#2e7d32;fontColor=light-dark(#333333,#cccccc);" value="DocKnowledgeMemory ★&#xa;→ knowledgeContentInfo&#xa;→ docSearchInfo / excelSearchInfo&#xa;(RAG 召回结果)" vertex="1">
+          <mxGeometry height="150" width="260" x="1647" y="1073" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Tool 列表&#xa;→ toolParam / toolResult&#xa;→ executeToolName" vertex="1">
+          <mxGeometry height="102" width="243" x="1655" y="1273" as="geometry" />
+        </mxCell>
+        <mxCell id="19" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Template.process(&#xa;  variables, writer&#xa;)" vertex="1">
+          <mxGeometry height="102" width="191" x="2053" y="848" as="geometry" />
+        </mxCell>
+        <mxCell id="20" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📝 最终 Prompt&#xa;━━━━━━━━━━&#xa;角色定义 (能力说明拼装)&#xa;+ 知识片段 (RAG)&#xa;+ 工具描述&#xa;+ 历史对话&#xa;+ User: query&#xa;━━━━━━━━━━&#xa;ReAct: Thought/Action/Observation" vertex="1">
+          <mxGeometry height="270" width="266" x="2294" y="764" as="geometry" />
+        </mxCell>
+        <mxCell id="21" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#f8bbd0;strokeColor=#c2185b;fontColor=light-dark(#333333,#cccccc);" value="🔀 渠道差异化覆盖&#xa;━━━━━━━━━━&#xa;HOTLINE: OUTPUT_LIMIT=300&#xa;          LLM_APPEND_MODE=APPEND&#xa;          ApplyScene=VOICE&#xa;测试场景: InvokeFrom=ROBOT_TEST&#xa;小米渠道: xmCtxParams.historyMessage" vertex="1">
+          <mxGeometry height="294" width="269" x="1643" y="1445" as="geometry" />
+        </mxCell>
+        <mxCell id="22" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=none;exitX=1;exitY=0.5;entryX=0.16;entryY=0;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="821" y="82" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" edge="1" parent="1" source="8" style="curved=1;startArrow=none;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.6;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="821" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="24" edge="1" parent="1" source="9" style="curved=1;startArrow=none;endArrow=none;exitX=1;exitY=0.5;entryX=0.23;entryY=1;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="821" y="338" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" edge="1" parent="1" source="19" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="26" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=0.64;exitY=0;entryX=0;entryY=0.5;" target="14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1558" y="572" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0;entryX=0;entryY=0.5;" target="15" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1558" y="796" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.92;entryX=0;entryY=0.5;" target="16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1558" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=0.67;exitY=1;entryX=0;entryY=0.5;" target="17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1558" y="1148" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=0.6;exitY=1;entryX=0;entryY=0.5;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1558" y="1324" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="31" edge="1" parent="1" source="11" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.46;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="194" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="32" edge="1" parent="1" source="12" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.44;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="394" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="33" edge="1" parent="1" source="14" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.4;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="572" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="34" edge="1" parent="1" source="15" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.19;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="796" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35" edge="1" parent="1" source="16" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.97;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="36" edge="1" parent="1" source="17" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.37;entryY=1;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="1148" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="37" edge="1" parent="1" source="18" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.43;entryY=1;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="1324" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="38" edge="1" parent="1" source="21" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0.45;entryY=1;" target="19" value="覆盖">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2028" y="1592" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="39" edge="1" parent="1" source="6" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;" target="5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="40" edge="1" parent="1" source="10" style="curved=1;startArrow=none;endArrow=block;" target="4" value="按 type 加载">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
