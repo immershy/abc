@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="第 1 页" id="7gvRKfkY79qoTCzDGwGc">
-    <mxGraphModel dx="1300" dy="659" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1083" dy="549" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry height="486" width="260" x="318" y="264" as="geometry" />
         </mxCell>
         <mxCell id="6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 保留结构化抽取&#xa;━━━━━━━━━━&#xa;{&#xa;&amp;nbsp;&amp;nbsp;&#39;sections&#39;: [&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{ &#39;level&#39;: 1, &#39;title&#39;: &#39;公司请假制度&#39;,&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;paragraphs&#39;: [&#39;员工请假...&#39;, &#39;病假...&#39;, &#39;婚假...&#39;, &#39;年假...&#39;] },&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{ &#39;level&#39;: 1, &#39;title&#39;: &#39;报销规则&#39;,&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;paragraphs&#39;: [&#39;所有报销...&#39;, &#39;差旅费...&#39;, &#39;餐饮费...&#39;] }&#xa;&amp;nbsp;&amp;nbsp;]&#xa;}&#xa;&#xa;用 Unstructured / Apache Tika / docx4j 保留 outline" vertex="1">
-          <mxGeometry height="486" width="260" x="163" y="800" as="geometry" />
+          <mxGeometry height="486" width="369" x="54" y="800" as="geometry" />
         </mxCell>
         <mxCell id="7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段2&#xa;ParagraphTextSplitter 切分&#xa;(按 \\R\\R 切, 不 cap/merge)" vertex="1">
           <mxGeometry height="126" width="260" x="473" y="980" as="geometry" />
@@ -35,7 +35,7 @@
           <mxGeometry height="510" width="260" x="621" y="2744" as="geometry" />
         </mxCell>
         <mxCell id="12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 扩展 sharding schema&#xa;━━━━━━━━━━&#xa;id | document_id | parent_id | level | heading_path | content | split_version&#xa;━━━━━━━━━━&#xa;201 | 555 | null | 0 (parent) | &#39;公司请假制度&#39; | &#39;员工请假...&#39; | v2&#xa;202 | 555 | 201 | 1 (child) | &#39;公司请假制度&#39; | &#39;病假需提供医生证明&#39; | v2&#xa;203 | 555 | 201 | 1 (child) | &#39;公司请假制度&#39; | &#39;婚假为10天...&#39; | v2&#xa;...&#xa;&#xa;split_version 字段 → 切分策略升级时可滚动重切" vertex="1">
-          <mxGeometry height="534" width="260" x="455" y="3304" as="geometry" />
+          <mxGeometry height="534" width="681" x="34" y="3304" as="geometry" />
         </mxCell>
         <mxCell id="13" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段4&#xa;DocumentShardingFullUpdateTask&#xa;调外部 embedding HTTP 服务" vertex="1">
           <mxGeometry height="102" width="302" x="765" y="3520" as="geometry" />
