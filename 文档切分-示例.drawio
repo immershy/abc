@@ -1,0 +1,209 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="7gvRKfkY79qoTCzDGwGc">
+    <mxGraphModel dx="1300" dy="659" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📄 用户上传文档&#xa;例: 公司HR制度.docx" vertex="1">
+          <mxGeometry height="78" width="210" x="188" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段1&#xa;DocumentResource 抽文本" vertex="1">
+          <mxGeometry height="78" width="249" x="168" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📥 原始 Word&#xa;━━━━━━━━━━&#xa;《公司请假制度》&#xa;&#xa;员工请假需提前一天通知主管。&#xa;病假需提供医生证明。&#xa;婚假为10天, 丧假为3天。&#xa;年假根据工龄计算。&#xa;&#xa;《报销规则》&#xa;&#xa;所有报销需在事件发生后30天内提交。&#xa;差旅费需附发票。&#xa;餐饮费每天上限200元。" vertex="1">
+          <mxGeometry height="414" width="260" x="8" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 抽出纯文本 (string)&#xa;━━━━━━━━━━&#xa;&#39;公司请假制度\&#xa;\&#xa;员工请假需提前一天通知主管。&#xa;病假需提供医生证明。\&#xa;婚假为10天, 丧假为3天。&#xa;年假根据工龄计算。\&#xa;\&#xa;报销规则\&#xa;\&#xa;所有报销需在事件发生后30天内提交。&#xa;差旅费需附发票。\&#xa;餐饮费每天上限200元。&#39;&#xa;&#xa;⚠️ 标题层级 / 加粗 / 列表 全部丢失" vertex="1">
+          <mxGeometry height="486" width="260" x="318" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 保留结构化抽取&#xa;━━━━━━━━━━&#xa;{&#xa;&amp;nbsp;&amp;nbsp;&#39;sections&#39;: [&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{ &#39;level&#39;: 1, &#39;title&#39;: &#39;公司请假制度&#39;,&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;paragraphs&#39;: [&#39;员工请假...&#39;, &#39;病假...&#39;, &#39;婚假...&#39;, &#39;年假...&#39;] },&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{ &#39;level&#39;: 1, &#39;title&#39;: &#39;报销规则&#39;,&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;paragraphs&#39;: [&#39;所有报销...&#39;, &#39;差旅费...&#39;, &#39;餐饮费...&#39;] }&#xa;&amp;nbsp;&amp;nbsp;]&#xa;}&#xa;&#xa;用 Unstructured / Apache Tika / docx4j 保留 outline" vertex="1">
+          <mxGeometry height="486" width="260" x="163" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段2&#xa;ParagraphTextSplitter 切分&#xa;(按 \\R\\R 切, 不 cap/merge)" vertex="1">
+          <mxGeometry height="126" width="260" x="473" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 当前切分结果 (4 chunks)&#xa;━━━━━━━━━━&#xa;chunk_1: &#39;公司请假制度&#39;&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(7 字符, 纯标题)&#xa;&#xa;chunk_2: &#39;员工请假需提前一天通知主管。病假需&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;提供医生证明。婚假为10天, 丧假为3天。&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;年假根据工龄计算。&#39;&#xa;&#xa;chunk_3: &#39;报销规则&#39;&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(4 字符, 纯标题)&#xa;&#xa;chunk_4: &#39;所有报销需在事件发生后30天内提交。&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;差旅费需附发票。餐饮费每天上限200元。&#39;&#xa;&#xa;⚠️ 标题独立成 chunk → 搜 &#39;请假制度&#39; 命中&#xa;但内容拿不到; 搜 &#39;病假证明&#39; 命中 chunk_2&#xa;但不知道属于 &#39;请假制度&#39; 章节" vertex="1">
+          <mxGeometry height="630" width="260" x="473" y="1336" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 结构感知 + parent-child&#xa;━━━━━━━━━━&#xa;parent_1 (章节级, 给 LLM 看):&#xa;&amp;nbsp;&amp;nbsp;heading_path: &#39;公司请假制度&#39;&#xa;&amp;nbsp;&amp;nbsp;content: &#39;员工请假需提前...年假根据工龄计算。&#39;&#xa;&#xa;&amp;nbsp;&amp;nbsp;child_1.1: &#39;员工请假需提前一天通知主管&#39;&#xa;&amp;nbsp;&amp;nbsp;child_1.2: &#39;病假需提供医生证明&#39;&#xa;&amp;nbsp;&amp;nbsp;child_1.3: &#39;婚假为10天, 丧假为3天&#39;&#xa;&amp;nbsp;&amp;nbsp;child_1.4: &#39;年假根据工龄计算&#39;&#xa;&#xa;parent_2 (章节级):&#xa;&amp;nbsp;&amp;nbsp;heading_path: &#39;报销规则&#39;&#xa;&amp;nbsp;&amp;nbsp;content: &#39;所有报销需在...餐饮费每天上限200元。&#39;&#xa;&amp;nbsp;&amp;nbsp;child_2.1 / 2.2 / 2.3 ...&#xa;&#xa;检索时 child 命中, 返回 parent 给 LLM (上下文完整)" vertex="1">
+          <mxGeometry height="678" width="260" x="325" y="2016" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段3&#xa;DocumentSharding 入库&#xa;(MySQL)" vertex="1">
+          <mxGeometry height="102" width="230" x="635" y="2304" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 当前 sharding 表行&#xa;━━━━━━━━━━&#xa;id | tenant_id | document_id | sharding_content&#xa;━━━━━━━━━━&#xa;101 | 8001 | 555 | &#39;公司请假制度&#39;&#xa;102 | 8001 | 555 | &#39;员工请假需提前...年假根据工龄计算。&#39;&#xa;103 | 8001 | 555 | &#39;报销规则&#39;&#xa;104 | 8001 | 555 | &#39;所有报销需在...餐饮费每天上限200元。&#39;&#xa;&#xa;⚠️ 无层级关系, 无 heading_path, 无 chunk_level" vertex="1">
+          <mxGeometry height="510" width="260" x="621" y="2744" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 扩展 sharding schema&#xa;━━━━━━━━━━&#xa;id | document_id | parent_id | level | heading_path | content | split_version&#xa;━━━━━━━━━━&#xa;201 | 555 | null | 0 (parent) | &#39;公司请假制度&#39; | &#39;员工请假...&#39; | v2&#xa;202 | 555 | 201 | 1 (child) | &#39;公司请假制度&#39; | &#39;病假需提供医生证明&#39; | v2&#xa;203 | 555 | 201 | 1 (child) | &#39;公司请假制度&#39; | &#39;婚假为10天...&#39; | v2&#xa;...&#xa;&#xa;split_version 字段 → 切分策略升级时可滚动重切" vertex="1">
+          <mxGeometry height="534" width="260" x="455" y="3304" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段4&#xa;DocumentShardingFullUpdateTask&#xa;调外部 embedding HTTP 服务" vertex="1">
+          <mxGeometry height="102" width="302" x="765" y="3520" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 当前调用 (一片 → 一向量)&#xa;━━━━━━━━━━&#xa;POST /embedding&#xa;{&#xa;&amp;nbsp;&amp;nbsp;&#39;model&#39;: &#39;default&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;data&#39;: [&#39;病假需提供医生证明。婚假为10天,&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;丧假为3天。年假根据工龄计算。&#39;],&#xa;&amp;nbsp;&amp;nbsp;&#39;version&#39;: &#39;QS_EMB_LARGE_V1&#39;&#xa;}&#xa;&#xa;← Response: [[0.0123, -0.4567, ..., 0.0891]]&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(1024 维 float)&#xa;&#xa;⚠️ 整段语义被平均, 查 &#39;病假&#39; 时&#xa;chunk 里混了婚假/年假, 相似度被稀释" vertex="1">
+          <mxGeometry height="558" width="260" x="786" y="3888" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 多视图向量 (一片 → 多向量)&#xa;━━━━━━━━━━&#xa;对 child &#39;病假需提供医生证明&#39; 生成 3 个视图:&#xa;&#xa;① 原文向量:&#xa;&amp;nbsp;&amp;nbsp;embed(&#39;病假需提供医生证明&#39;)&#xa;&#xa;② HyDE 假想问题向量 (LLM 生成):&#xa;&amp;nbsp;&amp;nbsp;Q1: &#39;病假需要什么材料?&#39;&#xa;&amp;nbsp;&amp;nbsp;Q2: &#39;请病假要不要医生证明?&#39;&#xa;&amp;nbsp;&amp;nbsp;Q3: &#39;生病了请假流程?&#39;&#xa;&amp;nbsp;&amp;nbsp;→ 各自 embed&#xa;&#xa;③ 摘要向量:&#xa;&amp;nbsp;&amp;nbsp;embed(&#39;员工病假需提交医生证明&#39;)&#xa;&#xa;用户问 &#39;我感冒了请假需要啥&#39; → 命中 Q1" vertex="1">
+          <mxGeometry height="606" width="260" x="635" y="4496" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段5&#xa;ES 写入&#xa;index_doc_embedding_v1" vertex="1">
+          <mxGeometry height="102" width="245" x="945" y="4748" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 当前 ES 文档&#xa;━━━━━━━━━━&#xa;{&#xa;&amp;nbsp;&amp;nbsp;&#39;tenant_id&#39;: 8001,&#xa;&amp;nbsp;&amp;nbsp;&#39;document_id&#39;: 555,&#xa;&amp;nbsp;&amp;nbsp;&#39;documen_sharding_id&#39;: 102,&#xa;&amp;nbsp;&amp;nbsp;&#39;document_name&#39;: &#39;公司HR制度&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;sharding_content&#39;: &#39;员工请假需提前一天...&#xa;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;年假根据工龄计算。&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;space_id&#39;: 12,&#xa;&amp;nbsp;&amp;nbsp;&#39;embedding&#39;: [0.0123, -0.4567, ...] (1024 维)&#xa;}&#xa;&#xa;⚠️ document_name 入库不检索&#xa;⚠️ 无 heading_path&#xa;⚠️ 1024 维硬卡, 换 bge-m3(1024)/text-emb-3(3072) 要改 schema" vertex="1">
+          <mxGeometry height="582" width="260" x="937" y="5152" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 扩展索引字段&#xa;━━━━━━━━━━&#xa;{&#xa;&amp;nbsp;&amp;nbsp;&#39;tenant_id&#39;: 8001,&#xa;&amp;nbsp;&amp;nbsp;&#39;document_id&#39;: 555,&#xa;&amp;nbsp;&amp;nbsp;&#39;sharding_id&#39;: 202,&#xa;&amp;nbsp;&amp;nbsp;&#39;parent_id&#39;: 201,&#xa;&amp;nbsp;&amp;nbsp;&#39;level&#39;: &#39;child&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;heading_path&#39;: &#39;公司HR制度 / 请假制度&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;content&#39;: &#39;病假需提供医生证明&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;content_bm25&#39;: &#39;病假 需 提供 医生 证明&#39; (ik_max_word),&#xa;&amp;nbsp;&amp;nbsp;&#39;embedding&#39;: [...],&#xa;&amp;nbsp;&amp;nbsp;&#39;hyde_embeddings&#39;: [[...], [...], [...]],&#xa;&amp;nbsp;&amp;nbsp;&#39;summary_embedding&#39;: [...],&#xa;&amp;nbsp;&amp;nbsp;&#39;embedding_model&#39;: &#39;bge-m3&#39;,&#xa;&amp;nbsp;&amp;nbsp;&#39;embedding_dim&#39;: 1024&#xa;}&#xa;&#xa;heading_path 单独可检索, BM25 用 ik_max_word" vertex="1">
+          <mxGeometry height="678" width="260" x="791" y="5784" as="geometry" />
+        </mxCell>
+        <mxCell id="19" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="阶段6&#xa;检索&#xa;HNSW + BM25 双路召回" vertex="1">
+          <mxGeometry height="102" width="226" x="1101" y="6072" as="geometry" />
+        </mxCell>
+        <mxCell id="20" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📤 当前检索流程&#xa;━━━━━━━━━━&#xa;用户问: &#39;我感冒了请假需要带啥材料&#39;&#xa;&#xa;① embed(query) → 向量&#xa;② HNSW top10 + BM25 top10 (ik_smart)&#xa;③ 合并去重&#xa;&#xa;实际命中 (举例):&#xa;&amp;nbsp;&amp;nbsp;rank1 (BM25): &#39;请假制度&#39; (chunk_1, 仅标题)&#xa;&amp;nbsp;&amp;nbsp;rank2 (vec): &#39;员工请假...年假根据工龄&#39; (chunk_2)&#xa;&amp;nbsp;&amp;nbsp;rank3 (vec): &#39;所有报销需在...&#39; (chunk_4, 噪声)&#xa;&#xa;→ 全部塞 LLM, 噪声多, 真正讲病假证明的&#xa;&amp;nbsp;&amp;nbsp;那一句被淹没在 chunk_2 的混合段里" vertex="1">
+          <mxGeometry height="558" width="260" x="1084" y="6512" as="geometry" />
+        </mxCell>
+        <mxCell id="21" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ 推荐: 多向量召回 + rerank&#xa;━━━━━━━━━━&#xa;用户问: &#39;我感冒了请假需要带啥材料&#39;&#xa;&#xa;① 三路召回 top20:&#xa;&amp;nbsp;&amp;nbsp;原文向量路: child 命中 &#39;病假需提供医生证明&#39;&#xa;&amp;nbsp;&amp;nbsp;HyDE 向量路: 命中 Q1 &#39;病假需要什么材料?&#39;&#xa;&amp;nbsp;&amp;nbsp;BM25 路: ik_max_word 命中 &#39;病假&#39;/&#39;材料&#39;&#xa;&#xa;② Union 去重 → 候选 ~20 条&#xa;&#xa;③ Rerank (bge-reranker-v2-m3):&#xa;&amp;nbsp;&amp;nbsp;rank1 score=0.94: &#39;病假需提供医生证明&#39;&#xa;&amp;nbsp;&amp;nbsp;rank2 score=0.71: &#39;员工请假需提前一天通知主管&#39;&#xa;&amp;nbsp;&amp;nbsp;rank3 score=0.12: (其他被压下)&#xa;&#xa;④ 取 top3 child, 拼接 parent 上下文给 LLM&#xa;&amp;nbsp;&amp;nbsp;&#39;参考: 公司请假制度 → 病假需提供医生证明&#39;" vertex="1">
+          <mxGeometry height="750" width="260" x="929" y="7120" as="geometry" />
+        </mxCell>
+        <mxCell id="22" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="✅ LLM 生成答案&#xa;&#39;感冒请病假需要提供医生证明,&#xa;同时按公司请假制度需提前一天通知主管&#39;" vertex="1">
+          <mxGeometry height="150" width="260" x="1239" y="7420" as="geometry" />
+        </mxCell>
+        <mxCell id="23" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="📌 端到端对比&#xa;━━━━━━━━━━&#xa;当前: 整段 embed → 噪声混入 → 召回不精 → LLM 推理压力大&#xa;推荐: 结构化 + 父子块 + 多向量 + rerank → 精准片段 + 完整上下文&#xa;&#xa;最小改动收益最大的一步: 阶段2 (切分策略) — 不改 schema 就能拿到 30%+ 召回提升" vertex="1">
+          <mxGeometry height="342" width="260" x="1239" y="7920" as="geometry" />
+        </mxCell>
+        <mxCell id="24" edge="1" parent="1" source="2" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" edge="1" parent="1" source="3" style="curved=1;startArrow=none;endArrow=none;exitX=0.12;exitY=1;entryX=0.5;entryY=0;" target="4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="138" y="239" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="26" edge="1" parent="1" source="3" style="curved=1;startArrow=none;endArrow=block;exitX=0.88;exitY=1;entryX=0.5;entryY=0;" target="5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="239" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="5" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.96;entryX=0.5;entryY=0;" target="6" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="293" y="775" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="5" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.96;entryX=0.5;entryY=0;" target="7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="603" y="775" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="7" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" edge="1" parent="1" source="8" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.98;entryX=0.5;entryY=0;" target="9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="1991" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="31" edge="1" parent="1" source="8" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.98;entryX=0.5;entryY=0;" target="10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="751" y="1991" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="32" edge="1" parent="1" source="10" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="11" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="33" edge="1" parent="1" source="11" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.93;entryX=0.5;entryY=0;" target="12" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="585" y="3279" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="34" edge="1" parent="1" source="11" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.93;entryX=0.5;entryY=0;" target="13" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="916" y="3279" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35" edge="1" parent="1" source="13" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="36" edge="1" parent="1" source="14" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.97;entryX=0.5;entryY=0;" target="15" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="765" y="4471" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="37" edge="1" parent="1" source="14" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.97;entryX=0.5;entryY=0;" target="16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1067" y="4471" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="38" edge="1" parent="1" source="16" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="39" edge="1" parent="1" source="17" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.98;entryX=0.5;entryY=0;" target="18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="921" y="5759" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="40" edge="1" parent="1" source="17" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.98;entryX=0.5;entryY=0;" target="19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1214" y="5759" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="41" edge="1" parent="1" source="19" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="42" edge="1" parent="1" source="20" style="curved=1;startArrow=none;endArrow=none;exitX=0;exitY=0.96;entryX=0.5;entryY=0;" target="21" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1059" y="7095" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="43" edge="1" parent="1" source="20" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.96;entryX=0.5;entryY=0;" target="22" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1369" y="7095" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="44" edge="1" parent="1" source="22" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="23" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
